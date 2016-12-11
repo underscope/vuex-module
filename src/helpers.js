@@ -5,7 +5,9 @@ function ns(namespace, key) {
 }
 
 function processArr(arr, namespace) {
-  return arr.map(it => ns(namespace, it));
+  let res = {};
+  arr.forEach(it => (res[it] = ns(namespace, it)));
+  return res;
 }
 
 function processObj(obj, namespace) {

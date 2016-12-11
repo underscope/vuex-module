@@ -7,9 +7,11 @@ function ns(namespace, key) {
 }
 
 function processArr(arr, namespace) {
-  return arr.map(function (it) {
-    return ns(namespace, it);
+  var res = {};
+  arr.forEach(function (it) {
+    return res[it] = ns(namespace, it);
   });
+  return res;
 }
 
 function processObj(obj, namespace) {
