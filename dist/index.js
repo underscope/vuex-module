@@ -69,7 +69,7 @@ var VuexModule = function () {
   }, {
     key: 'namespace',
     value: function namespace(key) {
-      return this._ns + '/' + key;
+      return this._ns ? this._ns + '/' + key : key;
     }
   }, {
     key: 'build',
