@@ -42,7 +42,7 @@ class VuexModule {
   }
 
   namespace(key) {
-    return `${this._ns}/${key}`;
+    return this._ns ? `${this._ns}/${key}` : key;
   }
 
   build() {
