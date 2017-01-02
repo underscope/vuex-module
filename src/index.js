@@ -15,11 +15,13 @@ class VuexModule {
     this._state = state;
   }
 
-  getter(f) {
-    const key = this.namespace(f.name);
-    this._getters[key] = (state, getters) => {
+  getter(f, options = {}) {
+    const key = options.global ? f.name : this.namespace(f.name);
+    this._getters[key] = (state, getters, rootState, rootGetters) => {
       this.state = state;
       this.getters = getters;
+      this.rootState = rootState;
+      this.rootGetters = rootGetters;
       return f.call(this);
     };
   }

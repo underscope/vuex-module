@@ -1,13 +1,14 @@
 {
   "name": "vuex-module",
   "author": "Damir Perisic",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Turn vuex modules into poetry.",
   "main": "dist/index.js",
   "keywords": [
     "vue",
     "vuex",
-    "module"
+    "module",
+    "actions"
   ],
   "scripts": {
     "dev": "node examples/server.js",
@@ -19,7 +20,7 @@
   },
   "dependencies": {
     "auto-bind": "^0.1.0",
-    "vuex": "^2.0.0"
+    "vuex": "^2.1.1"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",

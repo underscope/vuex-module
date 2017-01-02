@@ -34,10 +34,14 @@ var VuexModule = function () {
     value: function getter(f) {
       var _this = this;
 
-      var key = this.namespace(f.name);
-      this._getters[key] = function (state, getters) {
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+      var key = options.global ? f.name : this.namespace(f.name);
+      this._getters[key] = function (state, getters, rootState, rootGetters) {
         _this.state = state;
         _this.getters = getters;
+        _this.rootState = rootState;
+        _this.rootGetters = rootGetters;
         return f.call(_this);
       };
     }

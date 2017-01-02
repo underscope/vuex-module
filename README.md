@@ -6,9 +6,9 @@ Module that turns vuex modules into poetry.
 
 * Auto namespacing for mutations, actions and getters
 * Mappers for namespaced components
-* Contextual state and commit available via this
+* Localized state and commit available via this
 * Nicer way of registering mutations, actions and getters
-* Optional global registration
+* Optional global registration for getters
 
 ## Example
 
@@ -20,22 +20,18 @@ const { state, getter, action, mutation, build } = new VuexModule('products')
 
 state({ all: [] })
 
-getter(function allProducts() {
+getter(function all() {
   return this.state.all
 });
 
-action(function getAllProducts() {
+action(function fetch() {
   return shop.getProducts(products => {
-    this.commit('recieveProducts', products)
+    this.commit('fetch', products)
   })
 })
 
-mutation(function recieveProducts(products) {
+mutation(function fetch(products) {
   this.state.all = products
-})
-
-mutation(function addToCart({ id }) {
-  this.state.all.find(p => p.id === id).inventory -= 1
 })
 
 export default build()
@@ -51,19 +47,13 @@ to your components.
 
 ```
 export default {
-  computed: mapGetters({ products: 'allProducts' }, 'products'),
-  methods: {
-    ...mapMutations(['addToCart'], 'cart'),
-    ...mapActions(['getAllProducts'], 'products')
-  },
-  created() {
-    this.getAllProducts()
-  }
+  computed: mapGetters({ products: 'all' }, 'products'),
+  methods: mapActions(['fetch'], 'products')
 }
 ```
 
 Inside mutations state is available via `this`. This simplifies function
 declaration and makes code more readable. Same goes for getters and
-actions (context and commit).
+actions (context, commit, rootState, rootGetters).
 
 MIT
