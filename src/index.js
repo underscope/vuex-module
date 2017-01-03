@@ -11,8 +11,11 @@ class VuexModule {
     autoBind(this);
   }
 
-  state(state) {
-    this._state = state;
+  state(val) {
+    this._state = {
+      ...this._state,
+      ...val
+    };
   }
 
   getter(f, options = {}) {

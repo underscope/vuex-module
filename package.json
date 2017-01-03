@@ -1,7 +1,7 @@
 {
   "name": "vuex-module",
   "author": "Damir Perisic",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Turn vuex modules into poetry.",
   "main": "dist/index.js",
   "keywords": [

@@ -38,9 +38,8 @@ export default build()
 ```
 
 Getters, actions and mutations will be prefixed with with
-module name resulting with: `products/allProducts`,
-`products/getAllProducts`, `products/recieveProducts` and
-`products/addToCart` methods.
+module name resulting with: `products/all`, and
+`products/fetch` methods.
 
 You can then use VuexModule mappers to map namespaced methods
 to your components.
