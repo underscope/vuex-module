@@ -12,7 +12,7 @@ Module that turns vuex modules into poetry.
 
 ## Example
 
-```
+```javascript
 import { VuexModule } from 'vuex-module'
 import shop from '../../api/shop'
 
@@ -44,7 +44,7 @@ module name resulting with: `products/all`, and
 You can then use VuexModule mappers to map namespaced methods
 to your components.
 
-```
+```javascript
 export default {
   computed: mapGetters({ products: 'all' }, 'products'),
   methods: mapActions(['fetch'], 'products')
