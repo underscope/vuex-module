@@ -1,7 +1,7 @@
 {
   "name": "vuex-module",
   "author": "Damir Perisic",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Turn vuex modules into poetry.",
   "main": "dist/index.js",
   "keywords": [
@@ -15,6 +15,8 @@
     "test": "mocha --compilers js:babel-core/register --recursive",
     "test-cov": "babel-node isparta cover --report html --report text node_modules/.bin/_mocha",
     "build": "babel src --out-dir dist",
+    "example:build-dev": "webpack --config examples/webpack.config.js",
+    "example:build": "WEBPACK_BUILD=production webpack --config examples/webpack.config.js",
     "clean": "rm -rf dist",
     "lint": "eslint src test"
   },
@@ -37,6 +39,7 @@
     "eslint-plugin-standard": "^2.0.1",
     "express": "^4.14.0",
     "isparta": "^4.0.0",
+    "minimist": "^1.2.0",
     "mocha": "^3.2.0",
     "vue": "^2.1.4",
     "vue-loader": "^10.0.2",

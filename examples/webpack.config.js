@@ -2,19 +2,11 @@ const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
 
-module.exports = {
+const isProduction = () => process.env.WEBPACK_BUILD === 'production';
 
+const config = {
   devtool: 'inline-source-map',
-
-  entry: fs.readdirSync(__dirname).reduce((entries, dir) => {
-    const fullDir = path.join(__dirname, dir);
-    const entry = path.join(fullDir, 'app.js');
-    if (fs.statSync(fullDir).isDirectory() && fs.existsSync(entry)) {
-      entries[dir] = ['webpack-hot-middleware/client', entry];
-    }
-
-    return entries;
-  }, {}),
+  entry: fs.readdirSync(__dirname).reduce(collectEntries, {}),
 
   output: {
     path: path.join(__dirname, '__build__'),
@@ -41,8 +33,32 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
     }),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   ]
 };
+
+if (isProduction()) {
+  config.plugins.push(
+    new webpack.optimize.OccurenceOrderPlugin(),
+    //NOTE: Use `#keep_fnames` in order to preserve action/getter/mutation names
+    new webpack.optimize.UglifyJsPlugin({
+      compress: { warnings: false, keep_fnames: true },
+      mangle: { keep_fnames: true }
+    })
+  );
+} else {
+  config.plugins.push(
+    new webpack.HotModuleReplacementPlugin()
+  );
+}
+
+module.exports = config;
+
+function collectEntries(entries, dir) {
+  const fullDir = path.join(__dirname, dir);
+  const entry = path.join(fullDir, 'app.js');
+  if (!fs.statSync(fullDir).isDirectory() || !fs.existsSync(entry)) return entries;
+  entries[dir] = [entry];
+  if (!isProduction()) entries[dir].unshift('webpack-hot-middleware/client');
+  return entries;
+}
