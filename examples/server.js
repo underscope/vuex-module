@@ -4,6 +4,8 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const WebpackConfig = require('./webpack.config');
 
+const argv = require('minimist')(process.argv);
+
 const app = express();
 const compiler = webpack(WebpackConfig);
 
@@ -19,7 +21,7 @@ app.use(webpackHotMiddleware(compiler));
 
 app.use(express.static(__dirname));
 
-const port = process.env.PORT || 8080;
+const port = argv.p || argv.port || process.env.PORT || 8080;
 module.exports = app.listen(port, () => {
   console.log(`Server listening on http://localhost:${port}, Ctrl+C to stop`);
 });

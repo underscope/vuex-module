@@ -1,4 +1,5 @@
 node_modules
+__build__
 *.log
 *.pid
 *.seed
