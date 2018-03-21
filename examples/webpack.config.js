@@ -24,7 +24,7 @@ const config = {
 
   resolve: {
     alias: {
-      'vuex-module': path.resolve(__dirname, '../dist/index')
+      'vuex-module': path.resolve(__dirname, '../dist/vuex-module.min.js')
     }
   },
 
