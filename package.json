@@ -1,9 +1,10 @@
 {
   "name": "vuex-module",
   "author": "Damir Perisic",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "Turn vuex modules into poetry.",
-  "main": "dist/index.js",
+  "main": "dist/vuex-module.min.js",
+  "module": "dist/vuex-module.es.js",
   "keywords": [
     "vue",
     "vuex",
@@ -14,14 +15,13 @@
     "dev": "node examples/server.js",
     "test": "mocha --compilers js:babel-core/register --recursive",
     "test-cov": "babel-node isparta cover --report html --report text node_modules/.bin/_mocha",
-    "build": "babel src --out-dir dist",
+    "build": "bili",
     "example:build-dev": "webpack --config examples/webpack.config.js",
     "example:build": "WEBPACK_BUILD=production webpack --config examples/webpack.config.js",
-    "clean": "rm -rf dist",
+    "clean": "del-cli dist/* !dist/.gitkeep",
     "lint": "eslint src test"
   },
   "dependencies": {
-    "auto-bind": "^0.1.0",
     "vuex": "^2.1.1"
   },
   "devDependencies": {
@@ -31,8 +31,10 @@
     "babel-loader": "^6.2.9",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-stage-2": "^6.18.0",
+    "bili": "^3.0.12",
     "chai": "^3.5.0",
     "css-loader": "^0.26.1",
+    "del-cli": "^1.1.0",
     "eslint": "^3.12.0",
     "eslint-config-standard": "^6.2.1",
     "eslint-plugin-promise": "^3.4.0",

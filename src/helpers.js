@@ -1,4 +1,4 @@
-import { mapState, mapGetters, mapActions, mapMutations } from 'vuex';
+import * as vuex from 'vuex';
 
 function ns(namespace, key) {
   return `${namespace}/${key}`;
@@ -22,9 +22,7 @@ function process(map, ns) {
   return Array.isArray(map) ? processArr(map, ns) : processObj(map, ns);
 }
 
-module.exports = {
-  mapState,
-  mapGetters: (map, ns) => mapGetters(process(map, ns)),
-  mapActions: (map, ns) => mapActions(process(map, ns)),
-  mapMutations: (map, ns) => mapMutations(process(map, ns))
-};
+export const mapState = vuex.mapState;
+export const mapGetters = (map, ns) => vuex.mapGetters(process(map, ns));
+export const mapActions = (map, ns) => vuex.mapActions(process(map, ns));
+export const mapMutations = (map, ns) => vuex.mapMutations(process(map, ns));

@@ -1,4 +1,6 @@
 node_modules
+dist/*
+!dist/.gitkeep
 __build__
 *.log
 *.pid
