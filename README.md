@@ -37,7 +37,7 @@ mutation(function fetch(products) {
 export default build()
 ```
 
-Getters, actions and mutations will be prefixed with with
+Getters, actions and mutations will be prefixed with
 module name resulting with: `products/all`, and
 `products/fetch` methods.
 
